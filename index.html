@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aurellia Wright — poem and research log" />
+  <title>The Keeper&apos;s Log — Aurellia Wright</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+  
+  <!-- Icons + social -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta property="og:title" content="The Keeper’s Log" />
+  <meta property="og:description" content="Poem + research notes by Aurellia Wright." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="og.png" />
+  <style>
+/* The Keeper's Log — minimal, less cluttered */
+:root{
+  --bg: #07080b;
+  --panel: rgba(14, 16, 20, .62);
+  --panel2: rgba(14, 16, 20, .42);
+  --text: #eef2f8;
+  --muted: rgba(238,242,248,.72);
+  --line: rgba(255,255,255,.10);
+  --btn: #eef2f8;
+  --btnText: #07080b;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background:
+    radial-gradient(1000px 700px at 15% 0%, rgba(120,170,255,.14), transparent 60%),
+    radial-gradient(900px 600px at 90% 25%, rgba(255,255,255,.06), transparent 55%),
+    radial-gradient(900px 700px at 40% 100%, rgba(180,120,255,.08), transparent 60%),
+    var(--bg);
+}
+
+a{ color: inherit; text-decoration: none; }
+a:hover{ text-decoration: underline; text-underline-offset: .2em; }
+
+.container{
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(7,8,11,.62);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand{
+  display: inline-flex;
+  align-items: baseline;
+  gap: .55rem;
+  text-decoration: none;
+}
+.brand-mark{ font-size: 1.05rem; opacity: .9; }
+.brand-text{ font-weight: 600; letter-spacing: -0.01em; }
+
+.nav{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav a{ color: var(--muted); }
+.nav a:hover{ color: var(--text); text-decoration: none; }
+
+.nav-toggle{
+  display: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  border-radius: .7rem;
+  padding: .42rem .6rem;
+  font-size: 1rem;
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .95rem;
+  padding: .72rem 1rem;
+  border: 1px solid var(--line);
+  background: var(--btn);
+  color: var(--btnText);
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn:hover{ text-decoration: none; filter: brightness(.96); }
+.btn-ghost{
+  background: transparent;
+  color: var(--text);
+}
+.btn-small{
+  padding: .48rem .72rem;
+  border-radius: .75rem;
+}
+
+/* Typography helpers */
+.eyebrow{
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-size: .75rem;
+}
+.muted{ color: var(--muted); }
+
+/* Poem landing */
+.poem-hero{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5.25rem 0 3.25rem;
+}
+.poem-hero-inner{
+  width: 100%;
+  max-width: 860px;
+}
+.poem-head h1{
+  margin: .25rem 0 .35rem;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.1rem, 3vw + 1rem, 3.1rem);
+}
+.poem{
+  margin-top: 1.25rem;
+  white-space: pre-wrap;
+  font-family: "Source Serif 4", ui-serif, Georgia, serif;
+  font-size: 1.07rem;
+  line-height: 1.75;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  padding: 1.15rem 1.15rem;
+}
+.poem-actions{
+  margin-top: 1.05rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+/* Sections */
+.section{ padding: 3.25rem 0; }
+.section-head{ margin-bottom: 1.1rem; }
+.section-head h2{
+  margin: 0;
+  font-size: 1.55rem;
+  letter-spacing: -0.02em;
+}
+.subhead{
+  margin: .45rem 0 0;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+}
+.card-body{ padding: 1.1rem; }
+
+.card h3{ margin: 0 0 .35rem; letter-spacing: -0.01em; }
+
+.kv{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin-top: .85rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--line);
+}
+.k{ margin: 0; color: var(--muted); font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; }
+.v{ margin: .2rem 0 0; }
+
+.links{ margin-top: .9rem; display: flex; gap: .9rem; flex-wrap: wrap; }
+.links a{ color: var(--text); text-decoration: underline; text-underline-offset: .2em; }
+
+.details{
+  margin-top: .85rem;
+  border-top: 1px solid var(--line);
+  padding-top: .75rem;
+}
+.details summary{
+  cursor: pointer;
+  color: var(--muted);
+  list-style: none;
+}
+.details summary::-webkit-details-marker{ display: none; }
+
+/* Professional expanders */
+details{border:1px solid var(--line);border-radius:1rem;background:rgba(14,16,20,.42);padding:.75rem .95rem;margin:.75rem 0;}
+details[open]{background:rgba(14,16,20,.62);}
+details summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;color:var(--text);font-weight:600;letter-spacing:-0.01em;}
+details summary::after{content:"▸";opacity:.75;}
+details[open] summary::after{content:"▾";}
+details > .prose{margin-top:.65rem;}
+details p{margin:.45rem 0 0;}
+
+.bullets{ margin: .6rem 0 0; padding-left: 1.1rem; }
+
+.prose p{ margin: 0 0 .65rem; }
+.prose p:last-child{ margin-bottom: 0; }
+
+/* Footer */
+.site-footer{
+  border-top: 1px solid var(--line);
+  padding: 1.75rem 0;
+}
+.footer-inner{ display: flex; justify-content: space-between; align-items: center; }
+
+/* Mobile nav */
+@media (max-width: 860px){
+  .nav{ display: none; }
+  .nav-toggle{ display: inline-flex; }
+  .nav.is-open{
+    display: flex;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    left: 1rem;
+    flex-direction: column;
+    gap: .75rem;
+    padding: 1rem;
+    background: rgba(7,8,11,.92);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+  .kv{ grid-template-columns: 1fr; }
+}
+
+
+.divider{ height:1px; background: var(--line); margin: .95rem 0; }
+
+.public-boundary{ margin-top: .65rem; }
+
+.about-shelves{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: .75rem;
+}
+@media (max-width: 860px){
+  .about-shelves{ grid-template-columns: 1fr; }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Go to top">
+        <span class="brand-mark">☾</span>
+        <span class="brand-text">The Keeper&apos;s Log</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#poem">Poem</a>
+        <a href="#project1">Project I</a>
+        <a href="#project2">Project II</a>
+        <a href="#log">Research Log</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- POEM (LANDING) -->
+    <section id="poem" class="poem-hero">
+      <div class="container poem-hero-inner">
+        <header class="poem-head">
+          <p class="eyebrow">Aurellia Wright</p>
+          <h1>The Great Gray Lady</h1>
+</header>
+
+        <article class="poem">
+Somewhere in the mountains, the great gray lady waits for
+me, on a dark and lonely runway.
+
+She is not a thing built, but a thing summoned, an oath
+given shape. A silence so heavy it has mass, draped in
+the color of storm clouds that have forgotten how to rain.
+
+I do not come to her as the riders do, with their maps and
+their urgent demands. They see a chariot. I see
+the burden; the price of always knowing.
+
+She carries the long, flat crown upon her spine, that
+terrible, unblinking third eye which sees through the skin
+of the world. It is a weight no creature should bear,
+a gift no creature asked for,
+the ability to know the truth of what hides in the dark.
+
+In her shadow I am small and warm against her absolute cold.
+I am not a master. I am a keeper.
+I know the language of her veins—copper and light—threaded
+through her like a second nervous system, finer than
+nerves, harsher than bone.
+
+I know where she is fragile.
+I know the cost of her vision.
+
+The others will come soon enough. They will wake her
+with fire, they will demand she scream, they will spur her
+into the thinning air to hunt for ghosts.
+Those that have never been, and must never be.
+
+But at this hour, she belongs only to the quiet.
+And I am the only one who understands she does not want to hunt.
+
+She wants only to watch.
+
+I place my hand on her flank, a promise between the
+maker and the made: not to ask for miracles without
+knowing the price paid.
+
+Rest now, I tell her, before the noise begins.
+Rest, while the world is still allowed to hide.
+Rest, while the blindness lasts.
+        </article>
+</div>
+    </section>
+
+    <!-- PROJECT I -->
+    <section id="project1" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Project I — FPGA FMCW Radar DSP Core</h2>
+          <p class="subhead">Completed real-time baseband core that turns raw I/Q beat samples into detections and tracks.</p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-body">
+              <h3>What it does</h3>
+              <div class="prose">
+                <p class="muted">
+                  This is a hardware-oriented DSP pipeline for an FMCW radar receiver. Per frame, it ingests complex I/Q samples
+                  (fast-time within a chirp, slow-time across chirps), produces a calibrated range–Doppler power map, performs CFAR detection,
+                  and maintains Track-While-Scan (TWS) tracks.
+                </p>
+
+                <div class="divider"></div>
+
+                <h3>Processing chain (stage-by-stage)</h3>
+                <ol class="muted">
+                  <li><strong>Hamming window (fast-time)</strong> — suppresses range sidelobes prior to FFT.</li>
+                  <li><strong>Range FFT (“pulse compression”)</strong> — converts beat frequency bins to range bins per chirp.</li>
+                  <li><strong>Corner turn (matrix transpose)</strong> — reorders memory from [chirp][range] to [range][chirp] for Doppler processing.</li>
+                  <li><strong>MTI Doppler notch (3‑pulse canceller)</strong> — removes near-zero Doppler clutter along slow-time.</li>
+                  <li><strong>Doppler window (slow-time)</strong> — reduces Doppler sidelobes prior to coherent integration.</li>
+                  <li><strong>Coherent Doppler integration</strong> — integrates energy coherently across chirps (typically via Doppler FFT or equivalent accumulation).</li>
+                  <li><strong>Magnitude approximation (α‑max/β‑min)</strong> — low-cost |I+jQ| estimate for downstream detection.</li>
+                  <li><strong>2D Ordered-Statistic CFAR</strong> — adaptive thresholding in range–Doppler with robust noise estimation.</li>
+                  <li><strong>TWS with α‑β filtering</strong> — track management + smoothing of range/Doppler (and optionally angle) measurements.</li>
+                </ol>
+
+                <div class="divider"></div>
+
+                <h3>Key algorithms (implementation intent)</h3>
+
+                <details>
+                  <summary><strong>1) Hamming window sidelobe suppression</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      The fast-time samples of each chirp are multiplied by a Hamming window before the range FFT to reduce spectral leakage and
+                      suppress range sidelobes. In fixed-point hardware this is typically implemented as a coefficient ROM + complex multiply
+                      (or a real multiply applied identically to I and Q).
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>2) Range FFT pulse compression</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      FMCW “pulse compression” is achieved by FFTing the de-chirped beat signal. Each FFT bin corresponds to a beat frequency,
+                      mapped to range by the radar’s chirp slope. The output is a complex range profile per chirp, suitable for slow-time processing.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>3) Corner turning (matrix transposition)</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      Doppler processing operates across chirps for each range bin, while acquisition naturally arrives as contiguous fast-time samples.
+                      The core performs a corner turn so the same data can be streamed efficiently into the slow-time stages: conceptually,
+                      it transposes a range–chirp matrix using ping‑pong buffering / BRAM banking to sustain throughput.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>4) MTI Doppler notch filtering (3‑pulse canceller)</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      A 3‑pulse canceller is applied along slow-time to notch out stationary/near‑stationary clutter. A common form is:
+                      <span style="white-space:nowrap;">y[k] = x[k] − 2x[k−1] + x[k−2]</span>.
+                      This creates a Doppler-domain zero at DC and improves detection of moving targets in the presence of strong clutter.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>5) Doppler windowing + 6) coherent Doppler integration</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      After MTI, a slow-time window (e.g., Hamming/Hann/Blackman family) reduces Doppler sidelobes. Coherent integration then
+                      accumulates complex energy across chirps. In practice this is most often implemented as a Doppler FFT per range bin
+                      (yielding a full range–Doppler map), but the integration block is structured so that the windowed slow-time vector is the
+                      unit of work, matching FPGA-friendly streaming.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>7) α‑max/β‑min magnitude approximation</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      To avoid an expensive square‑root, the magnitude of a complex bin is approximated using a weighted max/min of the absolute components:
+                      <span style="white-space:nowrap;">|z| ≈ α·max(|I|,|Q|) + β·min(|I|,|Q|)</span>.
+                      This provides a hardware‑efficient, monotonic proxy for power/energy used by CFAR and tracking.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>8) 2D Ordered‑Statistic CFAR (OS‑CFAR)</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      OS‑CFAR forms an adaptive threshold per cell-under-test by collecting a 2D training ring in range–Doppler, sorting (or partially selecting)
+                      the samples, and choosing an order statistic (e.g., the k-th smallest) as the noise estimate. This is robust against interfering targets
+                      compared to CA‑CFAR. Guard cells protect the CUT from target leakage; scaling sets the desired false‑alarm rate.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>9) Track‑While‑Scan with α‑β filtered TWS</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      Detections are associated into tracks, with α‑β filtering providing a lightweight constant‑velocity estimator:
+                      the α term corrects position (e.g., range bin), and β corrects velocity (e.g., Doppler bin / radial speed).
+                      Tracks are confirmed, maintained, and pruned using hit/miss logic, enabling continuous scan‑to‑scan tracking.
+                    </p>
+                  </div>
+                </details>
+
+                <div class="divider"></div>
+
+                <h3>Outputs</h3>
+                <ul class="muted">
+                  <li><strong>Range–Doppler map</strong> suitable for visualization, logging, or downstream fusion.</li>
+                  <li><strong>Detection list</strong> (range bin, Doppler bin, magnitude/score) from 2D OS‑CFAR.</li>
+                  <li><strong>Track list</strong> (TWS) with α‑β filtered state estimates and track quality.</li>
+                </ul>
+
+                <div class="divider"></div>
+
+                <h3>Repository</h3>
+                <p class="muted">
+                  Source, models, and build collateral live here:
+                  <a href="https://github.com/Aurellia-Beam/fpga-fmcw-radar-processor">github.com/Aurellia-Beam/fpga-fmcw-radar-processor</a>.
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PROJECT II -->
+    <section id="project2" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Project II — S-band Linear AESA Notes</h2>
+          <p class="subhead">Early research exploration on sidelobe jamming suppression for linear arrays.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-body">
+              <h3>Scope</h3>
+              <p class="muted">
+                Build a credible signal/array model first: geometry, element spacing, steering limits, and first-order mutual coupling. Then grow into adaptive nulling experiments.
+              <div class="divider"></div>
+
+              <h3>High-level overview</h3>
+              <p class="muted">
+                I’m building a credible baseline model for a linear S-band AESA (balance-beam / dorsal-fin style) so I can later
+                test sidelobe-jamming countermeasures. The focus so far has been on choosing defensible
+                public-parameter defaults and validating that the model produces reasonable beam patterns—especially once mutual coupling is introduced.
+              </p>
+<p class="muted">
+                Next: sweep scan angles across the assumed sector, quantify coupling impact on achievable null depth with a more defensible coupling structure,
+                then begin adaptive nulling experiments on top of the validated baseline.
+              </p>
+
+              </p>
+
+              <div class="kv">
+                <div>
+                  <p class="k">Status</p>
+                  <p class="v">Active</p>
+                </div>
+                <div>
+                  <p class="k">Last updated</p>
+                  <p class="v">2026-02-08</p>
+                </div>
+                <div>
+                  <p class="k">Artifacts</p>
+                  <p class="v">Notes + plots</p>
+                </div>
+              </div>
+</div>
+          </article>
+        </div>
+      </div>
+    </section>
+<!-- RESEARCH LOG -->
+    <section id="log" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Research Log</h2>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-body">
+              <p class="eyebrow">2026-02-08</p>
+              <h3>Baseline model setup</h3>
+              <ul class="bullets">
+                <li><strong>Did:</strong> chose a plausible baseline linear S-band AESA model, including size, element count, spacing, and sector coverage.</li>
+                <li><strong>Learned:</strong> even simple coupling assumptions can visibly distort sidelobes, so coupling realism matters early.</li>
+                <li><strong>Next:</strong> finalize the model, then formalize jammer assumptions to start nulling experiments.</li>
+              </ul>
+</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>About</h2>
+          <p class="subhead">A few things I like, and the threads I keep pulling.</p>
+</div>
+
+        <div class="card">
+          <div class="card-body prose">
+            <p><strong>Aurellia Wright</strong></p>
+            <p>
+             Engineering Physics at KTH. I also spend time on the other side of the brain — percussion, poetry, and whatever book has me cornered.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="about-shelves">
+              <div>
+                <p><strong>Reading</strong></p>
+                <ul class="bullets">
+                  <li><em>Rabbits (Finished)</em></li>
+                  <li><em>A Quiet Room</em></li>
+                  <li><em>Stormjammers</em></li>
+                </ul>
+              </div>
+
+              <div>
+                <p><strong>Listening</strong></p>
+                <ul class="bullets">
+                  <li>The Growlers</li>
+                  <li>Sabaton</li>
+                  <li>Nightwish</li>
+                  <li>The Buttertones</li>
+                  <li>Dream Theater</li>
+                  <li>Madilyn Mei</li>
+                  <li>Laufey</li>
+                </ul>
+              </div>
+            </div>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="subhead">Email is the best way to reach me.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <p><a href="mailto:aurellia.wright@gmail.com">aurellia.wright@gmail.com</a></p>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="muted">© <span id="year"></span> Aurellia Wright • The Keeper&apos;s Log</p>
+      </div>
+    </footer>
+  </main>
+  <script>
+// Mobile menu toggle + footer year
+(function () {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.nav');
+  const year = document.getElementById('year');
+
+  if (year) year.textContent = String(new Date().getFullYear());
+
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>
