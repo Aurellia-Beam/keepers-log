@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 
   
-  <!-- Icons + social -->
   <link rel="icon" href="favicon.ico" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <meta property="og:title" content="The Keeper’s Log" />
@@ -300,7 +299,6 @@ details p{margin:.45rem 0 0;}
   </header>
 
   <main id="top">
-    <!-- POEM (LANDING) -->
     <section id="poem" class="poem-hero">
       <div class="container poem-hero-inner">
         <header class="poem-head">
@@ -377,7 +375,6 @@ Rest, while the blindness lasts.
 </div>
     </section>
 
-    <!-- PROJECT I -->
     <section id="project1" class="section">
       <div class="container">
         <div class="section-head">
@@ -528,8 +525,97 @@ Rest, while the blindness lasts.
       </div>
     </section>
 
+    <section id="project2" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Project II — ESM Deinterleaver</h2>
+          <p class="subhead">Pulse train deinterleaving and emitter identification using statistical signal processing.</p>
+        </div>
 
-    <!-- ABOUT -->
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-body">
+              <h3>System Overview</h3>
+              <div class="prose">
+                <p class="muted">
+                  A complete Python-based ESM processing pipeline that ingests interleaved Pulse Descriptor Words (PDWs) from multiple emitters.
+                  It uses statistical time-of-arrival analysis to separate pulse trains and classifies them against a threat library of
+                  surveillance, tracking, and missile radars.
+                </p>
+
+                <div class="divider"></div>
+
+                <h3>Key Algorithms</h3>
+
+                <details>
+                  <summary><strong>1) Sequential Difference Histogram (SDIF)</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      The core deinterleaver uses an SDIF histogram to identify candidate PRIs. It calculates time differences between pulses
+                      within a sliding window, detecting peaks that correspond to stable repetition intervals. It includes logic to
+                      suppress harmonics (multiples of the true PRI) by checking peak prominence and integer ratios.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>2) RF Pre-clustering & Gating</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      To reduce ambiguity in dense environments, PDWs are pre-clustered by Radio Frequency (RF) using adaptive gap thresholds.
+                      Once a PRI is locked, a forward/backward prediction gate associates pulses to the track, allowing for missing pulses
+                      and measurement noise while filtering out unrelated signals.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>3) Modulation Analysis</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      After deinterleaving, the system characterizes the timing stability. It calculates the coefficient of variation (CV)
+                      to distinguish between <strong>Stable</strong>, <strong>Jittered</strong>, and <strong>Staggered</strong> emitters.
+                      For staggered signals, it extracts the specific ratio sequence (e.g., `[1.0, 1.2, 1.5]`) used for range ambiguity resolution.
+                    </p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><strong>4) Weighted Library Classification</strong></summary>
+                  <div class="prose">
+                    <p class="muted">
+                      Extracted features (PRI, PW, RF, Modulation) are matched against a threat library using a weighted parameter-distance metric.
+                      Each library entry defines tolerances (e.g., ±50MHz RF, ±20µs PRI); the classifier computes a confidence score (0.0–1.0)
+                      ranking the likely emitter modes.
+                    </p>
+                  </div>
+                </details>
+
+                <div class="divider"></div>
+
+                <h3>Tech Stack</h3>
+                <ul class="muted">
+                  <li><strong>Language:</strong> Python 3.9+, NumPy</li>
+                  <li><strong>Input Data:</strong> Synthetic PDW streams (TOA, PW, RF, Amplitude)</li>
+                  <li><strong>Simulation:</strong> Poisson false alarms, Gaussian measurement noise, & dropouts</li>
+                </ul>
+
+                <div class="divider"></div>
+
+                <h3>Repository</h3>
+                <p class="muted">
+                  Source code and notebooks:
+                  <a href="#">github.com/Aurellia-Beam/esm-deinterleaver</a>
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
     <section id="about" class="section">
       <div class="container">
         <div class="section-head">
@@ -583,7 +669,6 @@ Rest, while the blindness lasts.
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <div class="section-head">
@@ -618,4 +703,9 @@ Rest, while the blindness lasts.
 
   toggle.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', isOp
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+})();
+</script>
+</body>
+</html>
